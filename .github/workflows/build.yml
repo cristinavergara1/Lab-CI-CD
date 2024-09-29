@@ -113,7 +113,7 @@ jobs:
           #From this path
           path: target/labcicd-0.0.1-SNAPSHOT.jar
       - name: Build & push Docker image
-        uses: mr-snitchers-excellent/docker-build-push@v6
+        uses: mr-smitchers-excellent/docker-build-push@v6
         with:
           image: cristinavergara1/labcicd
           tags: latest
