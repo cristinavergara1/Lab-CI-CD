@@ -112,6 +112,18 @@ jobs:
           name: artifact
           #From this path
           path: target/labcicd-0.01-SNAPSHOT.jar
+      - name: Build & push Docker image
+        uses: mr-snitchers-excellent/docker-build-push@v6
+        with:
+          image: cristinavergara1/labcicd
+            tag: latest
+            registry: docker.io
+            dockerfile: DockerFile
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+
+
+
 
 
 
