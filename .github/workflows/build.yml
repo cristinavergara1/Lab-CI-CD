@@ -127,7 +127,17 @@ jobs:
         run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-
+  jobs:
+    snyk:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Run Snyk to check for vulnerabilities
+          uses: snyk/actions@master
+          with:
+            command: test
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 
 
