@@ -131,12 +131,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set executable permission for mvnw
+        run: chmod +x ./mvnw
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions@master
         with:
           command: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  
 
 
 
