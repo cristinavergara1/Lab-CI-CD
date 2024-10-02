@@ -157,11 +157,12 @@ jobs:
 
       # Run Snyk to check for vulnerabilities
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions
+        uses: snyk/actions  # Usar la última versión
         with:
           command: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+ 
 
 
 
