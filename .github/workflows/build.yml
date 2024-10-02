@@ -157,7 +157,7 @@ jobs:
 
       # Run Snyk to check for vulnerabilities
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions@v1
+        uses: snyk/actions@v2
         with:
           command: test
         env:
