@@ -12,7 +12,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=cristinavergara1_labcicd&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=cristinavergara1_labcicd)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=cristinavergara1_labcicd&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=cristinavergara1_labcicd)
 [![Snyk Vulnerabilities for GitHub Repo](https://snyk.io/test/github/cristinavergara1/labcicd/badge.svg)](https://snyk.io/test/github/cristinavergara1/labcicd)
-[![Known Vulnerabilities](https://snyk.io/test/github/cristinavergara1/labcicd/badge.svg)](https://snyk.io/test/cristinavergara1/dbotia/labcicd)
+[![Known Vulnerabilities](https://snyk.io/test/github/cristinavergara1/labcicd/badge.svg)](https://snyk.io/test/github/cristinavergara1/labcicd)
 
 
 
