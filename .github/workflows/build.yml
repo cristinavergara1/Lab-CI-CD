@@ -156,12 +156,13 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       # Run Snyk to check for vulnerabilities
+
       - name: Run Snyk to check for vulnerabilities
-        uses: actions/snyk@v1
+        uses: snyk/actions/snyk@v1
         with:
-          command: test
+            command: test
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 
 
