@@ -133,17 +133,24 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: snyk/actions/setup@master
-      - uses: actions/setup-go@v1
+      - name: Checkout code
+        uses: actions/checkout@v2  # Usa la última versión estable del checkout
+
+      - name: Setup Snyk
+        uses: snyk/actions/setup@v2  # Usa la última versión estable de Snyk
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
         with:
           go-version: '1.13'
+
       - name: Grant execute permission to mvnw
         run: chmod +x ./mvnw
-      - name: Snyk monitor
-        run: snyk test
+
+      - name: Run Snyk test in debug mode
+        run: snyk test -d
         env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 
 
