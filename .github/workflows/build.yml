@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - nueva-rama
 
 jobs:
   # Test job
@@ -63,7 +64,7 @@ jobs:
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
-          resotre-keys: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       #Set up Maven cache
       - name: Cache Maven packages
         uses: actions/cache@v1
@@ -157,6 +158,19 @@ jobs:
         run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+
+  # Snyk Job
+  snyk:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 
 
