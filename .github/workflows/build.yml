@@ -113,53 +113,42 @@ jobs:
           name: artifact
           #From this path
           path: target/labcicd-0.0.1-SNAPSHOT.jar
-  # Docker job
-  create-docker-image:
-      name: Build Image - Crear imagen docker
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - uses: actions/checkout@v2
-        - name: Configurar Credenciales de AWS
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-west-1
-        - name: Iniciar sesión en AWS ECR
-          id: login-ecr
-          uses: aws-actions/amazon-ecr-login@v1
-        - name: Crear, etiquetar y enviar imágen a AWS ECR
-          env:
-            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: lab
-            IMAGE_TAG: latest
-          run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-  # Deploy job
+    # Deployment job
   deploy:
-    name: Enviar imagen docker a AWS ECS
-    runs-on: ubuntu-latest
-    needs: create-docker-image
+    needs: build
+    runs-on: [ self-hosted, aws-ec2 ]
     steps:
-      - name: Configurar Credenciales de AWS
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
+      - name: Pull Image from Docker Hub
+        run: sudo docker pull cristinavergara1/labcicd:latest
 
-      - name: Actualizar versión en ECS
-        run: |
-          aws ecs update-service --cluster Lab --service ServicioTest --task-definition Task-Lab --force-new-deployment
+      - name: Delete old container
+        run: sudo docker rm -f labcicd-container
+
+      - name: Run new container
+        run: sudo docker run -d -p 8080:8080 --name labcicd-container cristinavergara1/labcicd:latest
+
+  #CoverAlls
+  coverAlls:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Install dependencies
+        run: mvn install
 
       - name: Upload to Coveralls
         run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  
+
 
 
   # Snyk Job
