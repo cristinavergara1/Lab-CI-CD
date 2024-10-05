@@ -129,21 +129,6 @@ jobs:
         run: sudo docker run -d -p 8080:8080 --name labcicd-container cristinavergara1/labcicd:latest
 
   #CoverAlls
-  coverAlls:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-
-      - name: Install dependencies
-        run: mvn install
-
       - name: Upload to Coveralls
         run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
         env:
