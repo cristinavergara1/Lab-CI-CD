@@ -1,5 +1,5 @@
-# labcicd
-
+# Lab CI/CD 
+#### Este repositorio contiene un laboratorio completo de integración y despliegue continuo (CI/CD) utilizando Spring Boot como framework de desarrollo y herramientas como GitHub Actions, SonarCloud, JaCoCo, Coveralls, Snyk, Docker y AWS (EC2).
 [![DI/CD Pipeline](https://github.com/cristinavergara1/labcicd/actions/workflows/build.yml/badge.svg)](https://github.com/cristinavergara1/labcicd/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cristinavergara1_labcicd&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cristinavergara1_labcicd)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cristinavergara1_labcicd&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cristinavergara1_labcicd)
@@ -13,8 +13,6 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=cristinavergara1_labcicd&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=cristinavergara1_labcicd)
 [![Known Vulnerabilities](https://snyk.io/test/github/cristinavergara1/labcicd/badge.svg)](https://snyk.io/test/github/cristinavergara1/labcicd)
 [![Coverage Status](https://coveralls.io/repos/github/cristinavergara1/labcicd/badge.svg?branch=03b13190b80a5ed94cfd9dc10dcc60cd5a247069)](https://coveralls.io/github/cristinavergara1/labcicd?branch=03b13190b80a5ed94cfd9dc10dcc60cd5a247069)
-
-
 
 
 
